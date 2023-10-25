@@ -51,9 +51,9 @@ function onScroll() {
     }
 
     // Fade in/out comics based on submarine position
-    fadeComic("comic1", "photo1", 5, 60);  // Example values in percentages for comic1, adjust as needed
-    fadeComic("comic2", "photo2", 30, 90);  // Example values in percentages for comic2, adjust as needed
-    fadeComic("comic3", "photo3", 50, 100);  // Example values in percentages for comic3, adjust as needed
+    fadeComic("comic1", "photo1", 5, 35);  // Example values in percentages for comic1, adjust as needed
+    fadeComic("comic2", "photo2", 30, 55);  // Example values in percentages for comic2, adjust as needed
+    fadeComic("comic3", "photo3", 50, 75);  // Example values in percentages for comic3, adjust as needed
 }
 
 function spawnFish() {
