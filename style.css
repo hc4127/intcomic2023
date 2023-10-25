@@ -1,0 +1,89 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 200%;  /* You can adjust the height based on the depth you want */
+    font-family: Arial, sans-serif;
+    overflow-y: hidden; /* Prevents vertical scrolling */
+    background-color: #4CA3DD;  /* Ocean color */
+}
+
+#ocean {
+    position: relative;
+    height: 100%;
+}
+
+#submarine-container {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 1s;
+}
+
+#submarine {
+    /* Put the size of the submarine image */
+    width: 300px;
+    height: 300px;
+}
+
+#fish-container {
+    position: relative;
+    height: 100%;
+}
+
+.comic img {
+    width: 500px; /* Adjust to your desired width */
+    /* height will auto adjust to maintain the image's aspect ratio */
+}
+.comic {
+    opacity: 0;
+    position: absolute;
+    right: 2%;
+    transition: opacity 1s;
+}
+
+#comic1 {
+    top: 20%;  /* Example for comic1 */
+}
+
+#comic2 {
+    top: 40%;
+}
+
+#comic3 {
+    top: 60%;
+}
+
+.comic-photo {
+    opacity: 0;
+    position: absolute;
+    left: 2%;  /* Position the photos on the left side */
+    transition: opacity 1s;
+    width: 200px; /* Example size; adjust to your desired size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.comic-photo img {
+    width: 500px; /* Adjust to your desired width */
+    /* height will auto adjust to maintain the image's aspect ratio */
+}
+
+#photo1 {
+    top: 20%;
+}
+
+#photo2 {
+    top: 40%;
+}
+
+#photo3 {
+    top: 60%;
+}
+
+button {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
