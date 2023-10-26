@@ -1,15 +1,32 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 200%;  /* You can adjust the height based on the depth you want */
+    height: 200%;
     font-family: Arial, sans-serif;
     overflow-y: hidden; /* Prevents vertical scrolling */
-    background-color: #4CA3DD;  /* Ocean color */
+    background-color: #4CA3DD;
+}
+
+body {
+    background-image: url('localAssets/oceanBG.png');  /* background pattern(loops) */
+    background-repeat: repeat;
+    background-size: 1920px 1080px;
+    background-attachment: fixed;
+}
+
+#titleImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000; /* layering */
+    transition: opacity 1s; /* transition for opacity over 1 second */
 }
 
 #ocean {
     position: relative;
     height: 100%;
+    z-index: 1;  /* sets a layer for the ocean background */
 }
 
 #submarine-container {
@@ -21,35 +38,36 @@ body, html {
 }
 
 #submarine {
-    /* Put the size of the submarine image */
     width: 300px;
     height: 300px;
 }
 
 #fish-container {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    z-index: -1; /* ensures fish are behind everything */
+    pointer-events: none; /* ensures fish won't interfere with click events */
 }
 
 .comic img {
-    width: 500px; /* Adjust to your desired width */
-    /* height will auto adjust to maintain the image's aspect ratio */
+    width: 500px; /* size of all comic panels */
 }
 .comic {
     opacity: 0;
     position: absolute;
     right: 2%;
-    transition: opacity 1s;
+    transition: opacity 1s; /* fade animation for comics*/
 }
-
+/* positions of comics*/
 #comic1 {
-    top: 20%;  /* Example for comic1 */
+    top: 20%;
 }
-
 #comic2 {
     top: 40%;
 }
-
 #comic3 {
     top: 60%;
 }
@@ -57,25 +75,20 @@ body, html {
 .comic-photo {
     opacity: 0;
     position: absolute;
-    left: 2%;  /* Position the photos on the left side */
+    left: 2%;
     transition: opacity 1s;
     width: 200px; /* Example size; adjust to your desired size */
     height: auto; /* Maintain aspect ratio */
 }
-
 .comic-photo img {
     width: 500px; /* Adjust to your desired width */
-    /* height will auto adjust to maintain the image's aspect ratio */
 }
-
 #photo1 {
     top: 20%;
 }
-
 #photo2 {
     top: 40%;
 }
-
 #photo3 {
     top: 60%;
 }
@@ -86,4 +99,17 @@ button {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
+
+    font-size: 24px;
+    padding: 15px 30px;
+    width: auto;
+    height: auto;
+    background-color: #4CA3DD;  /* button color*/
+    border: none;
+    border-radius: 8px;      /* rounded edges */
+    cursor: pointer;         /* change the cursor to a pointer when hovering*/
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+button:hover {
+    background-color: #358AB7; /* Slightly darker color when hovering */
 }

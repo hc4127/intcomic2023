@@ -5,14 +5,27 @@ function submergeSubmarine() {
     window.scrollTo(0, 0);
 
     const submarineContainer = document.getElementById("submarine-container");
-    submarineContainer.style.top = "10%";  // Adjust to where you want the submarine to submerge
+    submarineContainer.style.top = "10%";  // % is how much the sub submerges
 
     // Allow scrolling
     document.body.style.overflowY = "scroll";
-    document.documentElement.style.overflowY = "scroll";  // This sets the overflow for the <html> element
+    document.documentElement.style.overflowY = "scroll";  // sets the overflow for the <html> element
 
     // Handle scroll events
     document.addEventListener('scroll', onScroll);
+
+    // Fade out the title image
+    const titleImage = document.getElementById("titleImage");
+    titleImage.style.opacity = "0";
+    // Fade out the button
+    const button = document.querySelector('button');
+    button.style.transition = "opacity 1s";   // 1 second fade-out transition
+    button.style.opacity = '0';
+
+    setTimeout(() => {
+        titleImage.style.display = "none";
+        button.remove();
+    }, 1000); // this is in ms
 }
 
 function getPixelFromPercentage(percentage) {
@@ -51,43 +64,56 @@ function onScroll() {
     }
 
     // Fade in/out comics based on submarine position
-    fadeComic("comic1", "photo1", 5, 35);  // Example values in percentages for comic1, adjust as needed
-    fadeComic("comic2", "photo2", 30, 55);  // Example values in percentages for comic2, adjust as needed
-    fadeComic("comic3", "photo3", 50, 75);  // Example values in percentages for comic3, adjust as needed
+    fadeComic("comic1", "photo1", 5, 35);  // parameters are fade in fade out positions
+    fadeComic("comic2", "photo2", 30, 55);
+    fadeComic("comic3", "photo3", 50, 75);
 }
 
-function spawnFish() {
-    const fishTypes = [
-        "localAssets/fish1Left.png",
+function spawnFish() { //handles spawning of fish sprites
+    const fishTypesLeft = [
         "localAssets/fish1Right.png",
-        "localAssets/fish2Left.png",
         "localAssets/fish2Right.png",
+        "localAssets/fish5Right.png",
+    ];
+    const fishTypesRight = [
+        "localAssets/fish1Left.png",
+        "localAssets/fish2Left.png",
         "localAssets/fish3Left.png",
         "localAssets/fish4Left.png",
         "localAssets/fish5Left.png",
-        "localAssets/fish5Right.png",
-        // ... add paths to all your fish images
     ];
 
-    const randomFish = fishTypes[Math.floor(Math.random() * fishTypes.length)];
+    // Determines direction (left-to-right or right-to-left)
+    const isLeftSpawn = Math.random() < 0.5;
+    const randomFish = isLeftSpawn ? fishTypesLeft[Math.floor(Math.random() * fishTypesLeft.length)]
+                                   : fishTypesRight[Math.floor(Math.random() * fishTypesRight.length)];
 
     const fish = document.createElement("img");
     fish.src = randomFish;
     fish.style.position = "absolute";
+    fish.style.zIndex = "0";  // Place fish behind the ocean but above the background
 
-    // Setting random starting positions for the fish
-    fish.style.bottom = `${Math.random() * 50}vh`; // Random vertical position ranging from 0vh to 50vh
-    fish.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+    let randomVerticalPosition = Math.random() * window.innerHeight;  // Random position in the viewport
+    fish.style.top = `${window.scrollY + randomVerticalPosition}px`; // Factoring in the scroll position
+    fish.style.left = isLeftSpawn ? '-10%' : '110%'; // Start outside of view for smooth entrance
 
     document.getElementById("fish-container").appendChild(fish);
 
-    let pos = parseInt(window.getComputedStyle(fish).bottom);
+    const moveAmount = 2;  // Determines speed, adjust as needed
+    let pos = parseInt(isLeftSpawn ? fish.style.left : window.innerWidth - parseInt(fish.style.left));
+
     let interval = setInterval(() => {
-        pos++;
-        fish.style.bottom = `${pos}px`;
-        if (pos > window.innerHeight) {
+        if (isLeftSpawn) {
+            pos += moveAmount;
+            fish.style.left = `${pos}px`;
+        } else {
+            pos -= moveAmount;
+            fish.style.left = `${pos}px`;
+        }
+
+        if ((isLeftSpawn && pos > window.innerWidth) || (!isLeftSpawn && pos + fish.offsetWidth < 0)) {
             clearInterval(interval);
             fish.remove();
         }
-    }, 20);  // Speed of fish going upwards, adjust the value as needed
+    }, 20);  // fish speed
 }
