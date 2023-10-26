@@ -53,7 +53,7 @@ body {
 }
 
 .comic img {
-    width: 500px; /* size of all comic panels */
+    width: 520px; /* size of all comic panels */
 }
 .comic {
     opacity: 0;

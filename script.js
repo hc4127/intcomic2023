@@ -66,7 +66,7 @@ function onScroll() {
     // Fade in/out comics based on submarine position
     fadeComic("comic1", "photo1", 5, 35);  // parameters are fade in fade out positions
     fadeComic("comic2", "photo2", 30, 55);
-    fadeComic("comic3", "photo3", 50, 75);
+    fadeComic("comic3", "photo3", 50, 80);
 }
 
 function spawnFish() { //handles spawning of fish sprites
